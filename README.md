@@ -1,4 +1,4 @@
-# Tinkoff AFAS: Automated Feedback Analysis System
+# AFAST: Automated Feedback Analysis System for Tinkoff
 
 > [!WARNING]
 > Project is WIP now.
