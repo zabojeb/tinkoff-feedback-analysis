@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=1440, maximum-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="https://animaproject.s3.amazonaws.com/home/favicon.png">
+    <meta name="og:type" content="website">
+    <meta name="twitter:card" content="photo">
+
+    <script id="anima-load-script" src="load.js"></script>
+    <script id="anima-hotspots-script" src="hotspots.js"></script>
+    <script id="anima-overrides-script" src="overrides.js"></script>
+    <script src="https://animaapp.s3.amazonaws.com/js/timeline.js"></script>
+
+    <style>
+        @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+
+        @import url("https://fonts.googleapis.com/css?family=Manrope:700,400|Pacifico:400");
+
+        .screen textarea:focus,
+        .screen input:focus {
+            outline: none;
+        }
+
+        .screen * {
+            -webkit-font-smoothing: antialiased;
+            box-sizing: border-box;
+        }
+
+        .screen div {
+            -webkit-text-size-adjust: none;
+        }
+
+        .component-wrapper a {
+            display: contents;
+            pointer-events: auto;
+            text-decoration: none;
+        }
+
+        .component-wrapper * {
+            -webkit-font-smoothing: antialiased;
+            box-sizing: border-box;
+            pointer-events: none;
+        }
+
+        .component-wrapper a *,
+        .component-wrapper input,
+        .component-wrapper video,
+        .component-wrapper iframe {
+            pointer-events: auto;
+        }
+
+        .component-wrapper.not-ready,
+        .component-wrapper.not-ready * {
+            visibility: hidden !important;
+        }
+
+        .screen a {
+            display: contents;
+            text-decoration: none;
+        }
+
+        .full-width-a {
+            width: 100%;
+        }
+
+        .full-height-a {
+            height: 100%;
+        }
+
+        .container-center-vertical {
+            align-items: center;
+            display: flex;
+            flex-direction: row;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .container-center-vertical>* {
+            flex-shrink: 0;
+            pointer-events: auto;
+        }
+
+        .container-center-horizontal {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            pointer-events: none;
+            width: 100%;
+        }
+
+        .container-center-horizontal>* {
+            flex-shrink: 0;
+            pointer-events: auto;
+        }
+
+        .auto-animated div {
+            --z-index: -1;
+            opacity: 0;
+            position: absolute;
+        }
+
+        .auto-animated input {
+            --z-index: -1;
+            opacity: 0;
+            position: absolute;
+        }
+
+        .auto-animated .container-center-vertical,
+        .auto-animated .container-center-horizontal {
+            opacity: 1;
+        }
+
+        .overlay-base {
+            display: none;
+            height: 100%;
+            opacity: 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+
+        .overlay-base.animate-appear {
+            align-items: center;
+            animation: reveal 0.3s ease-in-out 1 normal forwards;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            opacity: 0;
+        }
+
+        .overlay-base.animate-disappear {
+            animation: reveal 0.3s ease-in-out 1 reverse forwards;
+            display: block;
+            opacity: 1;
+            pointer-events: none;
+        }
+
+        .overlay-base.animate-disappear * {
+            pointer-events: none;
+        }
+
+        @keyframes reveal {
+            from {
+                opacity: 0
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        .animate-nodelay {
+            animation-delay: 0s;
+        }
+
+        .align-self-flex-start {
+            align-self: flex-start;
+        }
+
+        .align-self-flex-end {
+            align-self: flex-end;
+        }
+
+        .align-self-flex-center {
+            align-self: flex-center;
+        }
+
+        .valign-text-middle {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .valign-text-bottom {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        input:focus {
+            outline: none;
+        }
+
+        .listeners-active,
+        .listeners-active * {
+            pointer-events: auto;
+        }
+
+        .hidden,
+        .hidden * {
+            pointer-events: none;
+            visibility: hidden;
+        }
+
+        .smart-layers-pointers,
+        .smart-layers-pointers * {
+            pointer-events: auto;
+            visibility: visible;
+        }
+
+        .listeners-active-click,
+        .listeners-active-click * {
+            cursor: pointer;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #000000;
+
+            --font-size-l: 120px;
+            --font-size-m: 26px;
+            --font-size-s: 24px;
+            --font-size-xs: 20px;
+
+            --font-family-manrope: "Manrope", Helvetica;
+            --font-family-pacifico: "Pacifico", Helvetica;
+        }
+
+        :root {}
+
+
+        /* screen - frame-13 */
+
+        .frame-13 {
+            background-color: #e3e3e3;
+            height: 900px;
+            overflow: hidden;
+            overflow-x: hidden;
+            position: relative;
+            width: 1440px;
+        }
+
+        .frame-13 .rectangle-42-dgpnZq {
+            background-color: #cdcaca;
+            border-radius: 100px;
+            height: 93px;
+            left: 40px;
+            position: absolute;
+            top: 45px;
+            width: 1360px;
+        }
+
+        .frame-13 .rectangle-2-dgpnZq {
+            background-color: #ffdd2d;
+            border-radius: 50px;
+            height: 59px;
+            left: 1024px;
+            position: absolute;
+            top: 62px;
+            width: 281px;
+        }
+
+        .frame-13 .text_label-dgpnZq {
+            font-size: var(--font-size-xs);
+            left: 1081px;
+            letter-spacing: 0.40px;
+            line-height: 25px;
+            top: 78px;
+        }
+
+        .frame-13 .image-7-dgpnZq {
+            background-color: transparent;
+            height: 73px;
+            left: 59px;
+            object-fit: cover;
+            position: absolute;
+            top: 55px;
+            width: 263px;
+        }
+
+        .frame-13 .vector-dgpnZq {
+            height: 11px;
+            left: 1330px;
+            top: 93px;
+            width: 27px;
+        }
+
+        .frame-13 .vector-KwSdwG {
+            height: 15px;
+            left: 1337px;
+            top: 75px;
+            width: 13px;
+        }
+
+        .frame-13 .image-16-dgpnZq {
+            background-color: transparent;
+            height: 517px;
+            left: 488px;
+            object-fit: cover;
+            position: absolute;
+            top: 471px;
+            width: 1241px;
+        }
+
+        .frame-13 .rectangle-4-dgpnZq {
+            background-color: transparent;
+            backdrop-filter: blur(3.35px);
+            height: 628px;
+            left: 15px;
+            position: absolute;
+            top: 206px;
+            width: 1410px;
+        }
+
+        .frame-13 .x-dgpnZq {
+            color: #1b1a1a;
+            font-family: var(--font-family-pacifico);
+            font-size: var(--font-size-l);
+            letter-spacing: 2.40px;
+            line-height: 150px;
+            top: 344px;
+            white-space: nowrap;
+            width: auto;
+        }
+
+        .frame-13 .x-KwSdwG {
+            color: #060606;
+            font-family: var(--font-family-manrope);
+            font-size: var(--font-size-m);
+            letter-spacing: 0.52px;
+            line-height: 32.5px;
+            top: 547px;
+            width: 753px;
+        }
+
+        .frame-13 .rectangle-44-dgpnZq {
+            background-color: #ffdd2d;
+            border-radius: 50px;
+            height: 73px;
+            left: 155px;
+            position: absolute;
+            top: 686px;
+            width: 275px;
+        }
+
+        .frame-13 .text_label-KwSdwG {
+            font-size: var(--font-size-s);
+            left: 212px;
+            letter-spacing: 0.48px;
+            line-height: 30px;
+            top: 707px;
+        }
+
+        .frame-13 .text_label {
+            background-color: transparent;
+            color: var(--black);
+            font-family: var(--font-family-manrope);
+            font-style: normal;
+            font-weight: 700;
+            height: auto;
+            position: absolute;
+            text-align: left;
+            white-space: nowrap;
+            width: auto;
+        }
+
+        .frame-13 .vector {
+            background-color: transparent;
+            position: absolute;
+        }
+
+        .frame-13 .x {
+            background-color: transparent;
+            font-style: normal;
+            font-weight: 400;
+            height: auto;
+            left: 155px;
+            position: absolute;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body style="margin: 0;background: #e3e3e3;"><input type="hidden" id="anPageName" name="page" value="frame-13">
+    <div class="container-center-horizontal">
+        <div class="frame-13 screen " data-id="2003:9">
+            <div class="rectangle-42-dgpnZq" data-id="2003:10"></div>
+            <div class="rectangle-2-dgpnZq" data-id="2003:11"></div>
+            <a href="./auth.html"><div class="text_label-dgpnZq text_label" data-id="2003:12">Личный кабинет</div></a><img class="image-7-dgpnZq"
+                data-id="2003:14"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                anima-src="https://cdn.animaapp.com/projects/6606c8ea205dbc43f3509179/releases/6606c92d5448cff285891f5a/img/image-7-2.png"
+                alt="image 7"><img class="vector-dgpnZq vector" data-id="2003:15"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                anima-src="https://cdn.animaapp.com/projects/6606c8ea205dbc43f3509179/releases/6606cb3e65fd63d6f649c697/img/vector-6.svg"
+                alt="Vector"><img class="vector-KwSdwG vector" data-id="2003:16"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                anima-src="https://cdn.animaapp.com/projects/6606c8ea205dbc43f3509179/releases/6606cb3e65fd63d6f649c697/img/vector-7.svg"
+                alt="Vector"><img class="image-16-dgpnZq" data-id="2003:17"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                anima-src="https://cdn.animaapp.com/projects/6606c8ea205dbc43f3509179/releases/6606c92d5448cff285891f5a/img/image-16-2.png"
+                alt="image 16"><img class="rectangle-4-dgpnZq" data-id="2003:18"
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                anima-src="https://cdn.animaapp.com/projects/6606c8ea205dbc43f3509179/releases/6606e5297defff6da8bda4a8/img/rectangle-4.svg"
+                alt="Rectangle 4">
+            <h1 class="x-dgpnZq x" data-id="2003:19">Добрый день!</h1>
+            <p class="x-KwSdwG x" data-id="2003:20">Авторизируйтесь, чтобы перейти к рабочим задачам</p>
+            <div class="rectangle-44-dgpnZq" data-id="2006:25"><a href="./auth.html"></div>
+            <div class="text_label-KwSdwG text_label" data-id="2006:26">Авторизация</div>
+        </div>
+    </div>
+    <script src="launchpad-js/launchpad-banner.js" async></script>
+    <script defer src="https://animaapp.s3.amazonaws.com/static/restart-btn.min.js"></script>
+</body>
+
+</html>
