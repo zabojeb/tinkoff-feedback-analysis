@@ -1,2 +1,6 @@
-# tinkoff-feedback-analysis
-LLM-based feedback collection and analysis system for Tinkoff
+# Tinkoff AFAS: Automated Feedback Analysis System
+
+> [!WARNING]
+> Project is WIP now.
+> 
+> There is no available README at this point.
