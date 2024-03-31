@@ -1,4 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
+    const personalCabinetBtn = document.getElementById('personal-cabinet-btn');
+    
+    personalCabinetBtn.addEventListener('click', function() {
+        window.location.href = './profile.html';
+    });
+
     const categorySelect = document.getElementById('category');
     const reviewsContainer = document.getElementById('reviews');
 
@@ -29,17 +35,72 @@ document.addEventListener('DOMContentLoaded', function() {
                             <p><strong>Автор:</strong> ${author}</p>
                             <p><strong>Дата:</strong> ${datePublished.toLocaleString()}</p>
                             <p><strong>Оценка:</strong> ${ratingValue}</p>
-                            <p><strong>Отзыв:</strong> ${description}</p>
-                            <p><strong>Категория:</strong> ${field}</p>
+                            <div class="markdown-container">${showdownConverter.makeHtml(description)}</div>
+                            <p><strong>Категории:</strong></p>
+                            ${field.split(',').map(category => `<div class="category">${category.trim()}</div>`).join('')}
+                            <button class="analyze-btn" data-index="${key}">Проанализировать</button>
                         `;
                         reviewsContainer.appendChild(review);
                     }
+                });
+
+                // Добавляем обработчик события для каждой кнопки "Проанализировать"
+                const analyzeButtons = document.querySelectorAll('.analyze-btn');
+                analyzeButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        const index = this.getAttribute('data-index');
+                        analyzeReview(data, index);
+                    });
                 });
             })
             .catch(error => {
                 console.error('Ошибка при загрузке отзывов:', error);
             });
     }
+
+    async function analyzeReview(data, index) {
+        const requestBody = { review: data.description[index] }; // Отправляем текст отзыва
+    
+        try {
+            const response = await fetch("https://functions.yandexcloud.net/d4eh8qhr5onkp8u2499n", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(requestBody)
+            });
+    
+            if (!response.ok) {
+                throw new Error("Ошибка при отправке запроса");
+            }
+    
+            const responseData = await response.json();
+            const analyzedText = "### **Результаты анализа:**\n\n" + responseData.result.alternatives[0].message.text;
+    
+            // Создаем экземпляр конвертера Markdown
+            const converter = new showdown.Converter();
+            
+            // Преобразуем текст Markdown в HTML
+            const html = converter.makeHtml(analyzedText);
+    
+            // Создаем элемент для отображения результатов анализа
+            const analysisResult = document.createElement('div');
+            analysisResult.innerHTML = html;
+    
+            // Находим родительский элемент кнопки "Проанализировать"
+            const parentElement = document.querySelector(`.analyze-btn[data-index="${index}"]`).parentNode;
+    
+            // Вставляем результаты анализа после кнопки "Проанализировать"
+            parentElement.appendChild(analysisResult);
+        } catch (error) {
+            console.error('Ошибка при анализе отзыва:', error);
+            alert('Произошла ошибка при анализе отзыва');
+        }
+    }
+    
+    
+    const showdownConverter = new showdown.Converter();
+
 
     filterReviews(null); // Показываем все отзывы при загрузке страницы
 });
