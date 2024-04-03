@@ -58,5 +58,3 @@ def parse_sravniru(num, page):
 
 > [!WARNING]
 > Project is WIP now.
-> 
-> There is no available README at this point.
