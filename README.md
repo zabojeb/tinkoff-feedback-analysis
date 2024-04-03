@@ -1,4 +1,4 @@
-# AFAST: Automated Feedback Analysis System for Tinkoff
+# AFAStt: Automated Feedback Analysis System for Tinkoff
 
 Временно вебсайт доступен по ссылке <https://zabojeb.github.io/tinkoff-feedback-analysis/hello.html>
 
