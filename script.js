@@ -13,21 +13,50 @@ document.addEventListener('DOMContentLoaded', function() {
         filterReviews(selectedCategory);
     });
 
-    function filterReviews(category) {
-        fetch('https://raw.githubusercontent.com/zabojeb/tinkoff-feedback-analysis/main/database.json')
+    function filterReviews(category_num) {
+        fetch('https://storage.yandexcloud.net/tinkoff-ai/database_for_read.json')
             .then(response => response.json())
             .then(data => {
                 reviewsContainer.innerHTML = '';
-
+                
+                console.log(data);
+                
                 Object.keys(data.author).forEach(key => {
                     const author = data.author[key];
                     const datePublished = new Date(data.datePublished[key]);
                     const description = data.description[key];
                     const name = data.name[key];
                     const ratingValue = data.ratingValue[key];
-                    const field = String(data.field[key]); // Преобразуем поле в строку
+                    const field = data.categories[key]; // Преобразуем поле в строку
+                    
+                    const cats_by_nums = {'1': 'Кэшбек',
+                    '2': 'Акции',
+                    '3': 'Банковские карты',
+                    '4': 'Кредиты',
+                    '5': 'Подписки',
+                    '6': 'Вклады',
+                    '7': 'Инвестиции',
+                    '8': 'Сим-карты',
+                    '9': 'Страхование',
+                    '10': 'Путешествия',
+                    '11': 'Бизнес',
+                    '12': 'Сотрудники',
+                    '13': 'Обслуживание',
+                    '14': 'ППВЗ',
+                    '15': 'Блокировка/Разблокировка счета',
+                    '16': 'Мобильное приложение и сайт',
+                    '17': 'Другое'};
 
-                    if (!category || field.toLowerCase().includes(category.toLowerCase())) {
+                    const cats = [];
+                    for (let i = 0; i < field.length; i++){
+                        cats.push(cats_by_nums[field[i]])
+                    }
+                    
+                    category = cats_by_nums[category_num];
+
+                    console.log(category)
+                    const emotion = data.emotion[key][0].label;
+                    if (!category || cats.includes(category)) {
                         const review = document.createElement('div');
                         review.classList.add('review');
                         review.innerHTML = `
@@ -35,9 +64,10 @@ document.addEventListener('DOMContentLoaded', function() {
                             <p><strong>Автор:</strong> ${author}</p>
                             <p><strong>Дата:</strong> ${datePublished.toLocaleString()}</p>
                             <p><strong>Оценка:</strong> ${ratingValue}</p>
+                            <p><strong>Эмоциональная окраска:</strong> ${emotion}</p>
                             <div class="markdown-container">${showdownConverter.makeHtml(description)}</div>
                             <p><strong>Категории:</strong></p>
-                            ${field.split(',').map(category => `<div class="category">${category.trim()}</div>`).join('')}
+                            ${cats.map(category => `<div class="category">${category.trim()}</div>`).join('')}
                             <button class="analyze-btn" data-index="${key}">Проанализировать</button>
                         `;
                         reviewsContainer.appendChild(review);
