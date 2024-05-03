@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function filterReviews(category_num) {
-        fetch('https://storage.yandexcloud.net/tinkoff-ai/database_for_read.json')
+        fetch('https://storage.yandexcloud.net/tinkoff-ai/nocats10000.json')
             .then(response => response.json())
             .then(data => {
                 reviewsContainer.innerHTML = '';
