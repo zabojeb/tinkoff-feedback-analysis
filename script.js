@@ -71,7 +71,15 @@ document.addEventListener('DOMContentLoaded', function() {
                             <button class="analyze-btn" data-index="${key}">Проанализировать</button>
                         `;
                         reviewsContainer.appendChild(review);
+                        /*let reviewElement = document.querySelector('.review');
+                    if (ratingValue == "5") {
+                        reviewElement.style.backgroundColor = "#00ff00"
                     }
+                    else {
+                        reviewElement.style.backgroundColor = "#ff0000";
+                    }*/
+                    }
+                    
                 });
 
                 // Добавляем обработчик события для каждой кнопки "Проанализировать"
