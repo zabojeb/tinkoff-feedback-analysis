@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function filterReviews(category_num) {
-        fetch('https://storage.yandexcloud.net/tinkoff-ai/database_for_read.json')
+        fetch('https://storage.yandexcloud.net/tinkoff-ai/final500fr.json')
             .then(response => response.json())
             .then(data => {
                 reviewsContainer.innerHTML = '';
@@ -28,7 +28,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     const name = data.name[key];
                     const ratingValue = data.ratingValue[key];
                     const field = data.categories[key]; // Преобразуем поле в строку
-                    
+                    const source = data.source[key]
+
                     const cats_by_nums = {'1': 'Кэшбек',
                     '2': 'Акции',
                     '3': 'Банковские карты',
@@ -63,6 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <h3>${name}</h3>
                             <p><strong>Автор:</strong> ${author}</p>
                             <p><strong>Дата:</strong> ${datePublished.toLocaleString()}</p>
+                            <p><strong>Источник:</strong> <a href=https://${source.slice(0, -2) + '.ru'}>${source.slice(0, -2) + '.ru'}</a></p>
                             <p><strong>Оценка:</strong> ${ratingValue}</p>
                             <p><strong>Эмоциональная окраска:</strong> ${emotion}</p>
                             <div class="markdown-container">${showdownConverter.makeHtml(description)}</div>
